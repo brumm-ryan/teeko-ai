@@ -15,6 +15,7 @@ def respond():
     # Check if the board isn't the right length
     if len(boardStr) != 25:
         response["ERROR"] = "Board isn't the right length"
+        response.headers['Access-Control-Allow-Origin'] = '*'
     # Calculate the board and next move for ai
     else:
         for i in range(5):
