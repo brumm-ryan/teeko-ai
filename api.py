@@ -1,4 +1,5 @@
-from flask import Flask, request, jsonify
+import flask
+from flask import Flask, request, jsonify, make_response
 from game import Teeko2Player
 app = Flask(__name__)
 
@@ -10,8 +11,8 @@ def respond():
     boardStr = request.args.get("board", "")
     print(f"Received: {boardStr}")
     board = [[' ' for j in range(5)] for i in range(5)]
-    response = {'Content-Type': 'application/json'}
-    response.headers['Access-Control-Allow-Origin'] = '*'
+    response = {}
+
     # Check if the board isn't the right length
     if len(boardStr) != 25:
         response["ERROR"] = "Board isn't the right length"
@@ -27,12 +28,15 @@ def respond():
                 elif playerInt == 2:
                     playerChar = 'b'
                 board[i][j] = playerChar
+        print(f"Received: {board}")
         ai = Teeko2Player(board)
         move = ai.make_move(ai.board)
         response["move"] = move
-
+    resp = make_response(response)
+    resp.headers['Content-Type'] = 'application/json'
+    resp.headers['Access-Control-Allow-Origin'] = '*'
     # Return the response in json format
-    return jsonify(response)
+    return resp
 
 
 @app.route('/')
