@@ -10,12 +10,11 @@ def respond():
     boardStr = request.args.get("board", "")
     print(f"Received: {boardStr}")
     board = [[' ' for j in range(5)] for i in range(5)]
-    response = {}
-
+    response = {'Content-Type': 'application/json'}
+    response.headers['Access-Control-Allow-Origin'] = '*'
     # Check if the board isn't the right length
     if len(boardStr) != 25:
         response["ERROR"] = "Board isn't the right length"
-        response.headers['Access-Control-Allow-Origin'] = '*'
     # Calculate the board and next move for ai
     else:
         for i in range(5):
@@ -31,7 +30,6 @@ def respond():
         ai = Teeko2Player(board)
         move = ai.make_move(ai.board)
         response["move"] = move
-        response.headers['Access-Control-Allow-Origin'] = '*'
 
     # Return the response in json format
     return jsonify(response)
