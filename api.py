@@ -30,6 +30,7 @@ def respond():
         ai = Teeko2Player(board)
         move = ai.make_move(ai.board)
         response["move"] = move
+        response.headers['Access-Control-Allow-Origin'] = '*'
 
     # Return the response in json format
     return jsonify(response)
