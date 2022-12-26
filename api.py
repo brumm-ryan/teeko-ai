@@ -23,6 +23,7 @@ def respond():
 
         response["move"] = move
         response["board"] = get_response_board_string(ai.board)
+        response["win"] = ai.game_value(ai.board)
     resp = make_response(response)
     resp.headers['Content-Type'] = 'application/json'
     resp.headers['Access-Control-Allow-Origin'] = '*'

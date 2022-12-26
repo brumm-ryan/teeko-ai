@@ -93,7 +93,7 @@ class Teeko2Player:
 
     # get the max value recursively
     def max_value(self, state, depth):
-        if depth == 3 or self.game_value(state) != 0:
+        if depth == 4 or self.game_value(state) != 0:
             return state
         else:
             succ_list = self.succ(state)
@@ -110,7 +110,7 @@ class Teeko2Player:
 
     # get the min value based off opponent
     def min_value(self, state, depth):
-        if depth == 3 or self.game_value(state) != 0:
+        if depth == 4 or self.game_value(state) != 0:
             return state
         else:
             succ_list = self.opp_succ(state)
