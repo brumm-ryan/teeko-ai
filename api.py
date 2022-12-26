@@ -6,37 +6,49 @@ app = Flask(__name__)
 
 @app.route('/ai-move/', methods=['GET'])
 def respond():
-    print("testing api")
-    # Retrieve the name from the url parameter /getmsg/?name=
     boardStr = request.args.get("board", "")
-    print(f"Received: {boardStr}")
-    board = [[' ' for j in range(5)] for i in range(5)]
     response = {}
-
-    # Check if the board isn't the right length
     if len(boardStr) != 25:
         response["ERROR"] = "Board isn't the right length"
     # Calculate the board and next move for ai
     else:
-        for i in range(5):
-            for j in range(5):
-                playerInt = boardStr[(i * 5) + j]
-                playerInt = int(playerInt)
-                playerChar = ' '
-                if playerInt == 1:
-                    playerChar = 'r'
-                elif playerInt == 2:
-                    playerChar = 'b'
-                board[i][j] = playerChar
-        print(f"Received: {board}")
+        board = get_board_from_request(boardStr)
         ai = Teeko2Player(board)
         move = ai.make_move(ai.board)
+        ai.place_piece(move, 'r')
+
+        print(f"Received Board: {board}")
+        print(f"Move: {move}")
+        print(f"Returned: {board}")
+
         response["move"] = move
+        response["board"] = get_response_board_string(ai.board)
     resp = make_response(response)
     resp.headers['Content-Type'] = 'application/json'
     resp.headers['Access-Control-Allow-Origin'] = '*'
-    # Return the response in json format
     return resp
+
+
+def get_board_from_request(boardStr):
+    board = [[' ' for j in range(5)] for i in range(5)]
+    for i in range(5):
+        for j in range(5):
+            if boardStr[(i * 5) + j] == 's':
+                board[i][j] = ' '
+            else:
+                board[i][j] = boardStr[(i * 5) + j]
+    return board
+
+
+def get_response_board_string(board):
+    boardString = ""
+    for i in range(5):
+        for j in range(5):
+            if board[i][j] == ' ':
+                boardString += 's'
+            else:
+                boardString += board[i][j]
+    return boardString
 
 
 @app.route('/')
