@@ -313,7 +313,7 @@ class Teeko2Player:
     def heuristic_game_value(self, state):
         is_terminal = self.game_value(state)
         if is_terminal != 0:
-            return is_terminal
+            return is_terminal * 10
         my_score = 0
         opp_score = 0
         # count the horizontal 2 in a row placements
