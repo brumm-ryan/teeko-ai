@@ -93,7 +93,7 @@ class Teeko2Player:
 
     # get the max value recursively
     def max_value(self, state, depth):
-        if depth == 4 or self.game_value(state) != 0:
+        if depth == 3 or self.game_value(state) != 0:
             return state
         else:
             succ_list = self.succ(state)
@@ -129,10 +129,12 @@ class Teeko2Player:
         count = 0
         drop_phase = True
         succ_list = list()
+        piece_list = list()
         for i in range(len(state)):
             for j in range(len(state[0])):
                 if state[i][j] == self.my_piece:
                     count += 1
+                    piece_list += [i, j]
         if count == 4:
             drop_phase = False
 
@@ -313,7 +315,7 @@ class Teeko2Player:
     def heuristic_game_value(self, state):
         is_terminal = self.game_value(state)
         if is_terminal != 0:
-            return is_terminal * 10
+            return is_terminal
         my_score = 0
         opp_score = 0
         # count the horizontal 2 in a row placements
