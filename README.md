@@ -2,7 +2,7 @@
 
 ## About the API 
 This is a Flask API that calculates the optimal behavior for a Teeko player. 
-The endpoint `ai-move/` accepts a query param `board` that is a 25 character string that represents a 5 x 5 board flattened. 
+The endpoint `/ai-move` accepts a query param `board` that is a 25 character string that represents a 5 x 5 board flattened. 
 With each space of the board being one of the following 'r' => red player, 'b' => blue player, 's' => empty space.  
 It calculates the best move according the methods/hueristics defined below and responds with 3 fields.
 "board" => the state of the given board after the optimal move was made.
