@@ -16,3 +16,7 @@ We rate the condition of a state using a hueristic that is based on a number of 
 We then use a Min/Max optimization algorithm to recursively maximize the future possible states to predict the next best move.
 
 ## Test out the API -> https://teeko-ai-backend.herokuapp.com/ai-move/?board=sssssssssssbssssrssssssss
+
+## Try the web app -> https://brumm-ryan.github.io/teeko-web-app/
+
+## Web App Repo -> https://github.com/brumm-ryan/teeko-web-app
