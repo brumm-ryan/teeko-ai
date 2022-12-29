@@ -14,3 +14,5 @@ It calculates the best move according the methods/hueristics defined below and r
 Given a board of Teeko (aka state) we calculate possible future states based on all possible moves. 
 We rate the condition of a state using a hueristic that is based on a number of factors such as how many pieces in a row you have versus your opponenet.
 We then use a Min/Max optimization algorithm to recursively maximize the future possible states to predict the next best move.
+
+# Test out the API -> https://teeko-ai-backend.herokuapp.com/ai-move/?board=sssssssssssbssssrssssssss
